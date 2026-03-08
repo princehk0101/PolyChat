@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-ink-950: #070b14;
+  --color-ink-800: #1b2434;
+  --color-ink-600: #3f4b65;
+  --color-ink-400: #7281a3;
+  --color-cloud-100: #f5f8ff;
+  --color-cloud-200: #e7eefc;
+  --color-accent-700: #1f4fff;
+  --color-accent-600: #2f67ff;
+  --color-accent-500: #4f8cff;
+  --color-accent-100: #dce8ff;
+
+  --animate-float-slow: float-slow 9s ease-in-out infinite;
+  --animate-float-fast: float-fast 5s ease-in-out infinite;
+  --animate-fade-up: fade-up 0.5s ease-out both;
+
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-14px); }
+  }
+
+  @keyframes float-fast {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-7px); }
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--color-ink-950);
+    font-family: 'Manrope', system-ui, sans-serif;
+    background:
+      radial-gradient(circle at 12% 8%, rgba(79, 140, 255, 0.24), transparent 38%),
+      radial-gradient(circle at 84% 18%, rgba(47, 103, 255, 0.16), transparent 34%),
+      linear-gradient(180deg, #ffffff 0%, #f7faff 45%, #eef4ff 100%);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Space Grotesk', 'Manrope', sans-serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility app-grid-bg {
+  background-image:
+    linear-gradient(rgba(22, 38, 79, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22, 38, 79, 0.04) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+@utility surface-card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(79, 140, 255, 0.2);
+  border-radius: 1.25rem;
+  box-shadow:
+    0 20px 40px -30px rgba(19, 31, 63, 0.5),
+    0 1px 0 rgba(255, 255, 255, 0.7) inset;
+}
+
+@utility soft-outline {
+  border: 1px solid rgba(79, 140, 255, 0.22);
+  box-shadow: 0 0 0 3px rgba(79, 140, 255, 0.12);
+}
+
+@utility floating-orb {
+  animation: var(--animate-float-slow);
+}
+
+@utility floating-orb-fast {
+  animation: var(--animate-float-fast);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(79, 140, 255, 0.08);
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(31, 79, 255, 0.45);
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(31, 79, 255, 0.6);
+}
