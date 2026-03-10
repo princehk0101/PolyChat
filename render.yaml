@@ -39,4 +39,6 @@ services:
     staticPublishPath: dist
     envVars:
       - key: VITE_API_BASE_URL
-        value: https://polychat-api.onrender.com/api/
+        value: https://polychat-nucl.onrender.com/api/
+      - key: VITE_GOOGLE_CLIENT_ID
+        value: 438691191304-tb23kp3g02pfqjr7mgqdfknfg30po2oj.apps.googleusercontent.com

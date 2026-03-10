@@ -1,10 +1,35 @@
 import axios from 'axios';
 
-const DEFAULT_API_HOST =
-  typeof window !== 'undefined' && window.location?.hostname
-    ? window.location.hostname
-    : '127.0.0.1';
-const RAW_API_BASE = import.meta.env.VITE_API_BASE_URL || (import.meta.env.DEV ? '/api/' : `http://${DEFAULT_API_HOST}:8000/api/`);
+function inferApiBaseUrl() {
+  if (import.meta.env.VITE_API_BASE_URL) {
+    return import.meta.env.VITE_API_BASE_URL;
+  }
+
+  if (import.meta.env.DEV) {
+    return '/api/';
+  }
+
+  if (typeof window === 'undefined' || !window.location?.hostname) {
+    return 'http://127.0.0.1:8000/api/';
+  }
+
+  const { hostname, protocol } = window.location;
+
+  if (hostname === 'localhost' || hostname === '127.0.0.1') {
+    return `${protocol}//${hostname}:8000/api/`;
+  }
+
+  if (hostname.endsWith('.onrender.com')) {
+    const apiHost = hostname.includes('-web.')
+      ? hostname.replace('-web.', '-api.')
+      : hostname;
+    return `https://${apiHost}/api/`;
+  }
+
+  return `${protocol}//${hostname}/api/`;
+}
+
+const RAW_API_BASE = inferApiBaseUrl();
 const API_BASE_URL = RAW_API_BASE.endsWith('/') ? RAW_API_BASE : `${RAW_API_BASE}/`;
 
 const ACCESS_TOKEN_KEY = 'polychat_access_token';
